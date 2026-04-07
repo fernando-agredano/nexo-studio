@@ -1,17 +1,154 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Inicio">
+	<Navigation />
+	<main>
+		<Hero />
+		<Services />
+		<Projects />
+		<Contact />
+	</main>
+
+	<Footer />
+</Layout>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const mm = gsap.matchMedia();
+
+  mm.add(
+    {
+      motion: '(prefers-reduced-motion: no-preference)',
+      reduced: '(prefers-reduced-motion: reduce)',
+    },
+    (ctx) => {
+      const { motion } = ctx.conditions!;
+      const dur = motion ? 0.8 : 0.3;
+      const yAmt = motion ? 50 : 0;
+      const stOnce = { once: true } as const;
+
+      gsap.fromTo(
+        '#servicios .section-header',
+        { y: yAmt, autoAlpha: 0 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          duration: dur,
+          ease: 'power3.out',
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: '#servicios',
+            start: 'top 82%',
+            ...stOnce,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        '#servicios .service-card',
+        { y: yAmt, autoAlpha: 0 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          duration: dur,
+          stagger: motion ? 0.15 : 0,
+          ease: 'power3.out',
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: '#servicios .services-grid',
+            start: 'top 88%',
+            ...stOnce,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        '#proyectos .projects-header',
+        { y: yAmt, autoAlpha: 0 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          duration: dur,
+          ease: 'power3.out',
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: '#proyectos',
+            start: 'top 82%',
+            ...stOnce,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        '#proyectos .project-card',
+        { y: yAmt, autoAlpha: 0 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          duration: dur,
+          stagger: motion ? 0.12 : 0,
+          ease: 'power3.out',
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: '#proyectos .projects-grid',
+            start: 'top 88%',
+            ...stOnce,
+          },
+        }
+      );
+
+      const xInfo = motion ? -40 : 0;
+      const xForm = motion ? 40 : 0;
+
+      gsap.fromTo(
+        '#contacto .contact-info',
+        { x: xInfo, autoAlpha: 0 },
+        {
+          x: 0,
+          autoAlpha: 1,
+          duration: dur,
+          ease: 'power3.out',
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: '#contacto',
+            start: 'top 82%',
+            ...stOnce,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        '#contacto .contact-form-container',
+        { x: xForm, autoAlpha: 0 },
+        {
+          x: 0,
+          autoAlpha: 1,
+          duration: dur,
+          ease: 'power3.out',
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: '#contacto',
+            start: 'top 78%',
+            ...stOnce,
+          },
+        }
+      );
+    }
+  );
+
+  window.addEventListener('load', () => {
+    ScrollTrigger.refresh();
+  });
+</script>

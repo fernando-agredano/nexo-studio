@@ -1,0 +1,93 @@
+---
+/**
+ * NEXO Estudio — isotipo (SVG) + wordmark. Gradiente alineado al design system.
+ */
+interface Props {
+  /** Sufijo para el id del gradiente SVG (evita duplicados si hay varios logos en la página). */
+  uniqueSuffix?: string;
+}
+
+const { uniqueSuffix = '' } = Astro.props;
+const gradId = uniqueSuffix ? `nexo-mark-grad-${uniqueSuffix}` : 'nexo-mark-grad';
+---
+
+<a href="#inicio" class="brand-logo" aria-label="NEXO Estudio — Inicio">
+  <span class="brand-logo__mark" aria-hidden="true">
+    <svg
+      class="brand-logo__svg"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 40 40"
+      width="40"
+      height="40"
+      fill="none"
+    >
+      <defs>
+        <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color: #10b981" />
+          <stop offset="100%" style="stop-color: #f59e0b" />
+        </linearGradient>
+      </defs>
+      <!-- Triángulo: tres puntos de contacto; centro = el nexo -->
+      <path
+        d="M20 8 L33 30 L7 30 Z"
+        stroke={`url(#${gradId})`}
+        stroke-width="1.85"
+        stroke-linejoin="round"
+        fill="none"
+        opacity="0.95"
+      />
+      <circle cx="20" cy="8" r="2.75" fill={`url(#${gradId})`} />
+      <circle cx="33" cy="30" r="2.75" fill={`url(#${gradId})`} />
+      <circle cx="7" cy="30" r="2.75" fill={`url(#${gradId})`} />
+      <circle cx="20" cy="21" r="3.5" fill={`url(#${gradId})`} />
+    </svg>
+  </span>
+  <span class="brand-logo__wordmark">
+    <span class="brand-logo__name text-gradient">NEXO</span>
+    <span class="brand-logo__suffix">estudio</span>
+  </span>
+</a>
+
+<style>
+  .brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: inherit;
+    font-family: var(--font-display);
+  }
+
+  .brand-logo__mark {
+    display: flex;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 14px rgba(16, 185, 129, 0.28));
+  }
+
+  .brand-logo__svg {
+    display: block;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .brand-logo__wordmark {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    letter-spacing: 0.06em;
+  }
+
+  .brand-logo__name {
+    font-weight: 800;
+    font-size: 1.45rem;
+    line-height: 1;
+  }
+
+  .brand-logo__suffix {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-text-muted);
+  }
+</style>

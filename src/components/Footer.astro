@@ -1,0 +1,219 @@
+---
+import Logo from './Logo.astro';
+
+const navLinks = [
+  { href: '#inicio', label: 'Inicio' },
+  { href: '#servicios', label: 'Servicios' },
+  { href: '#proyectos', label: 'Proyectos' },
+  { href: '#contacto', label: 'Contacto' },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div class="site-footer__logo">
+          <Logo uniqueSuffix="footer" />
+        </div>
+        <p class="site-footer__tagline">
+          Producción digital, experiencias web y narrativas con criterio.
+        </p>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Pie de página">
+        <h3 class="site-footer__heading">Mapa</h3>
+        <ul class="site-footer__links">
+          {navLinks.map((link) => (
+            <li>
+              <a href={link.href} class="site-footer__link">{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="site-footer__contact">
+        <h3 class="site-footer__heading">Contacto</h3>
+        <ul class="site-footer__contact-list">
+          <li>
+            <a href="mailto:hola@nexoestudio.com" class="site-footer__link">hola@nexoestudio.com</a>
+          </li>
+          <li>
+            <span class="site-footer__muted">Guadalajara, Jalisco, México</span>
+          </li>
+        </ul>
+        <a href="#contacto" class="site-footer__cta">Agendar conversación</a>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p class="site-footer__legal">
+        © {year} NEXO Estudio. Todos los derechos reservados.
+      </p>
+      <p class="site-footer__note">
+        Hecho con precisión — Astro &amp; diseño a medida.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 2rem;
+    border-top: 1px solid rgba(16, 185, 129, 0.12);
+    background: linear-gradient(180deg, transparent 0%, rgba(5, 8, 1, 0.85) 40%, var(--color-bg) 100%);
+    padding: clamp(3rem, 6vw, 4.5rem) 0 2.5rem;
+  }
+
+  .site-footer__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .site-footer__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.75fr) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 3.5rem);
+    align-items: start;
+  }
+
+  .site-footer__brand {
+    max-width: 22rem;
+  }
+
+  .site-footer__logo {
+    margin-bottom: 1rem;
+  }
+
+  .site-footer__logo :global(.brand-logo__svg) {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .site-footer__logo :global(.brand-logo__name) {
+    font-size: 1.55rem;
+  }
+
+  .site-footer__tagline {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .site-footer__heading {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 0 0 1.1rem;
+  }
+
+  .site-footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .site-footer__link {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+    width: fit-content;
+  }
+
+  .site-footer__link:hover {
+    color: var(--color-primary);
+  }
+
+  .site-footer__links .site-footer__link {
+    display: inline-block;
+  }
+
+  .site-footer__links .site-footer__link:hover {
+    transform: translateX(6px);
+  }
+
+  .site-footer__contact-list {
+    list-style: none;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .site-footer__muted {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  .site-footer__cta {
+    display: inline-flex;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .site-footer__cta:hover {
+    border-bottom-color: var(--color-primary);
+    color: #6ee7b7;
+  }
+
+  .site-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .site-footer__legal {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .site-footer__note {
+    font-size: 0.8rem;
+    color: rgba(148, 163, 184, 0.75);
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .site-footer__top {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .site-footer__brand {
+      grid-column: 1 / -1;
+      max-width: none;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .site-footer__top {
+      grid-template-columns: 1fr;
+    }
+
+    .site-footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

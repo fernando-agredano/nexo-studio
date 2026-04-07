@@ -1,0 +1,99 @@
+---
+import Logo from './Logo.astro';
+
+const navLinks = [
+  { href: "#inicio", label: "Inicio" },
+  { href: "#servicios", label: "Servicios" },
+  { href: "#proyectos", label: "Proyectos" },
+  { href: "#contacto", label: "Contacto" },
+];
+---
+
+<nav class="nav glass" id="main-nav">
+  <div class="container nav-content">
+    <div class="logo">
+      <Logo />
+    </div>
+    
+    <ul class="nav-links">
+      {navLinks.map((link) => (
+        <li>
+          <a href={link.href} class="nav-link">{link.label}</a>
+        </li>
+      ))}
+    </ul>
+    
+    <div class="nav-actions">
+      <a href="#contacto" class="btn btn-primary">Empieza ahora</a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(calc(100vw - 2rem), var(--layout-max-width));
+    z-index: 100;
+    padding: 0.65rem 0;
+    box-sizing: border-box;
+  }
+  
+  .nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  
+  .nav-link {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+  
+  .nav-link:hover {
+    color: var(--color-primary);
+  }
+  
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  const mm = gsap.matchMedia();
+
+  mm.add(
+    {
+      motion: '(prefers-reduced-motion: no-preference)',
+      reduced: '(prefers-reduced-motion: reduce)',
+    },
+    (ctx) => {
+      const { motion } = ctx.conditions!;
+      gsap.from('#main-nav', {
+        y: motion ? -80 : 0,
+        autoAlpha: 0,
+        duration: motion ? 0.8 : 0.3,
+        ease: 'power3.out',
+        delay: 0.1,
+      });
+    }
+  );
+</script>

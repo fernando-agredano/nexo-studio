@@ -1,0 +1,274 @@
+---
+---
+
+<header id="inicio" class="hero section">
+  <div class="container hero-container">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="hero-title__line">
+          Elevando la <span class="text-gradient">Innovación</span>
+        </span>
+        <span class="hero-title__line">
+          <span class="hero-title__accent">Visual</span> a la Perfección
+        </span>
+      </h1>
+      <p class="hero-description">
+        En NEXO Estudio unimos estrategia, imagen y código para lanzar experiencias digitales que la gente recuerda. Menos ruido, más impacto.
+      </p>
+    </div>
+    
+    <div class="hero-visual">
+      <div class="glow-sphere"></div>
+      <div class="visual-card glass">
+        <div class="card-header">
+           <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+        </div>
+        <div class="card-content">
+           <pre><code>{`const nexo = {
+  foco: "Claridad",
+  medio: "Emoción",
+  meta: "Resultado"
+};`}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-top: clamp(6.5rem, 14vh, 9rem);
+    overflow: hidden;
+  }
+  
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 40%;
+    height: 40%;
+    background: radial-gradient(circle, var(--color-primary-glow) 0%, transparent 70%);
+    filter: blur(80px);
+    z-index: -1;
+  }
+  
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 4.5rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title__line {
+    display: block;
+  }
+
+  .hero-title__accent {
+    color: var(--color-secondary);
+  }
+  
+  .hero-description {
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+    max-width: 600px;
+  }
+  
+  .hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+  
+  .glow-sphere {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: var(--color-primary);
+    filter: blur(100px);
+    opacity: 0.2;
+    border-radius: 50%;
+    animation: pulse 4s infinite alternate;
+  }
+
+  @keyframes pulse {
+    from {
+      transform: scale(1);
+      opacity: 0.15;
+    }
+    to {
+      transform: scale(1.2);
+      opacity: 0.35;
+    }
+  }
+  
+  .visual-card {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 4/5;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+    transform-style: preserve-3d;
+    backface-visibility: visible;
+    will-change: transform, opacity;
+  }
+
+  .visual-card:hover {
+    box-shadow: 0 60px 120px rgba(0, 0, 0, 0.55), 0 0 40px var(--color-primary-glow);
+  }
+  
+  .card-header {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  
+  .red { background: #ff5f56; }
+  .yellow { background: #ffbd2e; }
+  .green { background: #27c93f; }
+  
+  .card-content pre {
+    color: var(--color-primary);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 968px) {
+    .hero-container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .hero-description {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-visual {
+      margin-top: 3rem;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  const mm = gsap.matchMedia();
+
+  mm.add(
+    {
+      motion: '(prefers-reduced-motion: no-preference)',
+      reduced: '(prefers-reduced-motion: reduce)',
+    },
+    (ctx) => {
+      const { motion } = ctx.conditions!;
+
+      if (motion) {
+        const hero = document.querySelector('.hero') as HTMLElement | null;
+        const card = document.querySelector('.visual-card') as HTMLElement | null;
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+        if (card) {
+          gsap.set(card, {
+            transformPerspective: 1000,
+            force3D: true,
+          });
+        }
+
+        tl.from('.hero-title', { y: 60, autoAlpha: 0, duration: 0.9 })
+          .from('.hero-description', { y: 30, autoAlpha: 0, duration: 0.7 }, '-=0.55');
+
+        if (card) {
+          tl.fromTo(
+            card,
+            {
+              y: 70,
+              autoAlpha: 0,
+              rotationY: -25,
+              rotationX: 8,
+              transformPerspective: 1000,
+              force3D: true,
+            },
+            {
+              y: 0,
+              autoAlpha: 1,
+              rotationY: -10,
+              rotationX: 5,
+              duration: 1.2,
+              ease: 'back.out(1.2)',
+              force3D: true,
+            },
+            '-=0.8'
+          );
+        }
+
+        const onMove = (e: MouseEvent) => {
+          if (!hero || !card) return;
+          const rect = hero.getBoundingClientRect();
+          const xPct = (e.clientX - rect.left) / rect.width - 0.5;
+          const yPct = (e.clientY - rect.top) / rect.height - 0.5;
+
+          gsap.to(card, {
+            transformPerspective: 1000,
+            rotationY: -10 + xPct * 14,
+            rotationX: 5 - yPct * 7,
+            duration: 0.6,
+            ease: 'power2.out',
+            overwrite: 'auto',
+            force3D: true,
+          });
+        };
+
+        const onLeave = () => {
+          if (!card) return;
+          gsap.to(card, {
+            transformPerspective: 1000,
+            rotationY: -10,
+            rotationX: 5,
+            duration: 0.8,
+            ease: 'power2.out',
+            overwrite: 'auto',
+            force3D: true,
+          });
+        };
+
+        if (hero && card) {
+          hero.addEventListener('mousemove', onMove);
+          hero.addEventListener('mouseleave', onLeave);
+        }
+
+        return () => {
+          hero?.removeEventListener('mousemove', onMove);
+          hero?.removeEventListener('mouseleave', onLeave);
+        };
+      }
+
+      gsap.from(['.hero-title', '.hero-description', '.visual-card'], {
+        autoAlpha: 0,
+        duration: 0.4,
+        stagger: 0.1,
+      });
+    }
+  );
+</script>

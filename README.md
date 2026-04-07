@@ -1,43 +1,62 @@
-# Astro Starter Kit: Minimal
+# NEXO Estudio — Landing de portafolio
+
+Landing page de una sola página para una agencia de producción digital (marca y contenido de ejemplo). Forma parte de mi portafolio web como muestra de maquetación, sistema de diseño en CSS y animación ligera con JavaScript.
+
+## Vista previa
+
+![Vista principal de la landing — hero y navegación](public/images/Vista-Previa.png)
+
+## Stack
+
+- **[Astro](https://astro.build/) 6** — sitio estático, componentes `.astro`
+- **CSS** — variables, utilidades y estilos por componente (sin framework UI)
+- **[GSAP](https://gsap.com/)** — entrada del hero, parallax en la tarjeta de código, animaciones al scroll (`ScrollTrigger`) y transiciones con respeto a `prefers-reduced-motion`
+
+## Requisitos
+
+- Node.js **≥ 22.12.0**
+
+## Instalación y uso
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+El servidor de desarrollo queda en [http://localhost:4321](http://localhost:4321).
 
-## 🚀 Project Structure
+| Comando | Descripción |
+| :------ | :---------- |
+| `npm run dev` | Servidor de desarrollo |
+| `npm run build` | Genera la versión de producción en `./dist/` |
+| `npm run preview` | Previsualiza el build localmente |
+| `npm run astro` | CLI de Astro (`astro check`, `astro add`, etc.) |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Estructura del proyecto
 
 ```text
-/
-├── public/
+├── public/              # Estáticos (favicon, imágenes de proyecto)
 ├── src/
-│   └── pages/
-│       └── index.astro
+│   ├── components/      # Navigation, Hero, Services, Projects, Contact, Footer, Logo
+│   ├── layouts/         # Layout.astro (shell HTML, fuentes, CSS global)
+│   ├── pages/           # index.astro — composición de la landing
+│   └── styles/          # global.css — tokens y utilidades
+├── astro.config.mjs
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Secciones de la página
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+1. **Inicio** — hero con titular, copy y tarjeta tipo editor de código  
+2. **Servicios** — tres bloques (producción visual, estrategia, desarrollo)  
+3. **Proyectos** — grid de tres casos con ilustraciones SVG  
+4. **Contacto** — datos, enlaces y formulario (front-end; sin backend conectado)  
+5. **Pie** — mapa del sitio, contacto y créditos
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Despliegue
 
-## 🧞 Commands
+Cualquier hosting de sitios estáticos sirve el contenido de `./dist/` tras `npm run build` (por ejemplo Vercel, Netlify, Cloudflare Pages o GitHub Pages).
 
-All commands are run from the root of the project, from a terminal:
+## Licencia y uso
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Código y diseño de este repositorio son material de muestra para portafolio. Si reutilizas partes del proyecto, conserva la atribución o adapta la marca según tu caso.
