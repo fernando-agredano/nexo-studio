@@ -89,12 +89,16 @@ const year = new Date().getFullYear();
   }
 
   .site-footer__logo :global(.brand-logo__svg) {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 1.85rem;
+    height: 1.85rem;
   }
 
   .site-footer__logo :global(.brand-logo__name) {
-    font-size: 1.55rem;
+    font-size: 1.2rem;
+  }
+
+  .site-footer__logo :global(.brand-logo__suffix) {
+    font-size: 0.65rem;
   }
 
   .site-footer__tagline {
@@ -133,7 +137,14 @@ const year = new Date().getFullYear();
   }
 
   .site-footer__link:hover {
-    color: var(--color-primary);
+    color: var(--color-secondary);
+  }
+
+  .site-footer__link:focus-visible {
+    color: var(--color-secondary);
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 
   .site-footer__links .site-footer__link {
@@ -169,8 +180,16 @@ const year = new Date().getFullYear();
   }
 
   .site-footer__cta:hover {
-    border-bottom-color: var(--color-primary);
-    color: #6ee7b7;
+    border-bottom-color: var(--color-secondary);
+    color: var(--color-secondary);
+  }
+
+  .site-footer__cta:focus-visible {
+    border-bottom-color: var(--color-secondary);
+    color: var(--color-secondary);
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 4px;
+    border-radius: 4px;
   }
 
   .site-footer__bottom {

@@ -158,6 +158,14 @@
     .hero-container {
       grid-template-columns: 1fr;
       text-align: center;
+      justify-items: center;
+      width: 100%;
+    }
+
+    .hero-content {
+      width: 100%;
+      max-width: 36rem;
+      margin-inline: auto;
     }
 
     .hero-description {
@@ -167,6 +175,54 @@
 
     .hero-visual {
       margin-top: 3rem;
+      width: 100%;
+      max-width: 22rem;
+      margin-inline: auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      /* Espacio bajo el navbar fijo (top 1.25rem + altura barra) + respiro extra */
+      padding-top: max(7.25rem, calc(env(safe-area-inset-top, 0px) + 6.25rem));
+      min-height: 100svh;
+      padding-bottom: 2.5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.15rem, 9vw, 3.25rem);
+      margin-bottom: 1.15rem;
+    }
+
+    .hero-description {
+      font-size: 1.02rem;
+      line-height: 1.6;
+      max-width: 100%;
+    }
+
+    .hero-container {
+      gap: 2.25rem;
+    }
+
+    .glow-sphere {
+      width: 220px;
+      height: 220px;
+    }
+
+    .visual-card {
+      max-width: 100%;
+      padding: 1.2rem 1.1rem;
+      aspect-ratio: auto;
+      min-height: 14rem;
+    }
+
+    .card-content pre {
+      font-size: 0.82rem;
+      text-align: left;
+    }
+
+    .hero-visual {
+      max-width: min(100%, 20rem);
     }
   }
 </style>
@@ -176,12 +232,13 @@
 
   const mm = gsap.matchMedia();
 
-  mm.add(
-    {
-      motion: '(prefers-reduced-motion: no-preference)',
-      reduced: '(prefers-reduced-motion: reduce)',
-    },
-    (ctx) => {
+  const motionQueries = {
+    motion: '(prefers-reduced-motion: no-preference)',
+    reduced: '(prefers-reduced-motion: reduce)',
+  };
+
+  mm.add('(min-width: 769px)', () => {
+    mm.add(motionQueries, (ctx) => {
       const { motion } = ctx.conditions!;
 
       if (motion) {
@@ -269,6 +326,41 @@
         duration: 0.4,
         stagger: 0.1,
       });
-    }
-  );
+    });
+  });
+
+  mm.add('(max-width: 768px)', () => {
+    mm.add(motionQueries, (ctx) => {
+      const { motion } = ctx.conditions!;
+
+      if (motion) {
+        const card = document.querySelector('.visual-card') as HTMLElement | null;
+        if (card) {
+          gsap.set(card, {
+            rotationY: 0,
+            rotationX: 0,
+            transformPerspective: 1000,
+            force3D: true,
+          });
+        }
+
+        gsap
+          .timeline({ defaults: { ease: 'power3.out' } })
+          .from('.hero-title', { y: 36, autoAlpha: 0, duration: 0.75 })
+          .from('.hero-description', { y: 22, autoAlpha: 0, duration: 0.55 }, '-=0.45')
+          .from(
+            '.visual-card',
+            { y: 40, autoAlpha: 0, duration: 0.65, ease: 'power3.out' },
+            '-=0.35'
+          );
+        return;
+      }
+
+      gsap.from(['.hero-title', '.hero-description', '.visual-card'], {
+        autoAlpha: 0,
+        duration: 0.35,
+        stagger: 0.08,
+      });
+    });
+  });
 </script>

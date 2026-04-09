@@ -178,4 +178,52 @@ const projects = [
       height: clamp(240px, 45vw, 300px);
     }
   }
+
+  @media (max-width: 768px) {
+    .projects-grid {
+      gap: 1.35rem;
+      max-width: 100%;
+    }
+
+    .project-card {
+      padding: 0.75rem;
+    }
+
+    .project-image-container {
+      height: clamp(200px, 52vw, 260px);
+      border-radius: 0.65rem;
+    }
+
+    .project-info {
+      padding: 1.1rem 0.35rem 0.5rem;
+    }
+
+    .project-info h3 {
+      font-size: 1.12rem;
+    }
+
+    .project-info p {
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .project-category {
+      font-size: 0.72rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      padding: 0.32rem 0.65rem;
+    }
+
+    .small {
+      padding: 0.42rem 0.85rem;
+      font-size: 0.74rem;
+    }
+
+    .project-overlay {
+      padding: 1.25rem;
+    }
+  }
 </style>

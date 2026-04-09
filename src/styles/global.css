@@ -72,6 +72,38 @@ a {
   padding: 5rem 0;
 }
 
+@media (max-width: 768px) {
+  .section {
+    padding: 3.25rem 0;
+  }
+
+  .section-title {
+    font-size: clamp(1.85rem, 6.5vw, 2.65rem);
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .section-header {
+    margin-bottom: clamp(2rem, 5vw, 2.75rem);
+  }
+}
+
+/* Solo lectores de pantalla / accesibilidad */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Encabezados de sección (misma escala en todo el sitio; no usar solo en un .astro scoped) */
 .section-header {
   text-align: center;
